@@ -11,6 +11,14 @@ BOOKS=[
 ]
 
 
+#------------------------------------------DELETE HTTP REQUEST---------------------------------
+@app.delete("/books/delete_book/{title_name}")
+async def delete_book_by_title(title_name: str):
+    for i in range(len(BOOKS)):
+        if BOOKS[i].get("title").casefold()==title_name.casefold():
+            BOOKS.pop(i)
+    return BOOKS
+
 #------------------------------------------PUT HTTP REQUEST---------------------------------
 @app.put("/books/update_book")
 async def update_book(updated_book=Body()):
